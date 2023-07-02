@@ -1,7 +1,7 @@
 Flatmates Bill Documentation
-The code you provided is a simple implementation to calculate and generate a bill for flatmates living together. It includes three classes: Bill, Flatmate, and PdfReport. Below is a detailed explanation of each class and its purpose.
+This code is a simple implementation to calculate and generate a bill for flatmates living together. It includes three classes: Bill, Flatmate, and PdfReport. Below is a detailed explanation of each class and its purpose.
 
-Bill Class
+**Bill Class**
 The Bill class represents a bill object and contains information about the total amount and period of the bill. It has the following attributes and methods:
 
 Attributes
@@ -9,7 +9,9 @@ amount: The total amount of the bill.
 period: The period for which the bill is generated.
 Methods
 __init__(self, amount, period): The constructor method initializes the Bill object with the provided amount and period.
-Flatmate Class
+
+
+**Flatmate Class**
 The Flatmate class represents a person who lives in the flat and pays a share of the bill. It has the following attributes and methods:
 
 Attributes
@@ -18,7 +20,9 @@ days_in_house: The number of days the flatmate stayed in the house during the bi
 Methods
 __init__(self, name, days_in_house): The constructor method initializes the Flatmate object with the provided name and days_in_house.
 pays(self, bill, flatmate2): This method calculates and returns the amount that the flatmate needs to pay based on their share of the bill. It takes the bill object and the other flatmate2 object as parameters.
-PdfReport Class
+
+
+**PdfReport Class**
 The PdfReport class creates a PDF file that contains data about the flatmates and their bill amounts for a specific period. It has the following attributes and methods:
 
 Attributes
@@ -32,7 +36,9 @@ Sets the font and inserts the title.
 Inserts the period label and its value.
 Inserts the name and bill amount for the first flatmate.
 Outputs the PDF with the specified filename.
-Execution
+
+
+**Execution**
 The code after the class definitions demonstrates how to use the classes to calculate the bill and generate a PDF report. It does the following:
 
 Creates an instance of the Bill class with an amount of 1200 and a period of "August 2021".

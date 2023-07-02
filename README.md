@@ -1,4 +1,6 @@
-Flatmates Bill Documentation
+**Flatmates Bill Documentation**
+
+
 This code is a simple implementation to calculate and generate a bill for flatmates living together. It includes three classes: Bill, Flatmate, and PdfReport. Below is a detailed explanation of each class and its purpose.
 
 **Bill Class**

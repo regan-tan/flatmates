@@ -1,21 +1,42 @@
-from flat import Bill, Flatmate
-from report import PdfReport
+from flask.views import MethodView
+from wtforms import Form, StringField, SubmitField
+from flask import Flask, render_template, url_for, request
 
-amount = float(input("Hey user, enter the total bill amount: "))
-period = input("What is the bill period? E.g. December 2020: ")
+app = Flask(__name__)
+class HomePage(MethodView):
 
-name1 = input("What is your name? ")
-days_in_house1 = int(input(f"How many days did {name1} stay in the house during the bill period {period}? "))
+    def get(self):
+        return render_template('index.html')
 
-name2 = input("What is the name of the other flatmate? ")
-days_in_house2 = int(input(f"How many days did {name2} stay in the house during the bill period {period}? "))
+class BillFormPage(MethodView):
 
-bill = Bill(amount, period)
-flatmate1 = Flatmate(name1, days_in_house1)
-flatmate2 = Flatmate(name2, days_in_house2)
+    def get(self):
+        bill_form = BillForm()
+        return render_template('bill_form_page.html', 
+                               billform=bill_form)
 
-print(f"{name1} pays: ", flatmate1.pays(bill, flatmate2))
-print(f"{name2} pays: ", flatmate2.pays(bill, flatmate1))
 
-pdf_report = PdfReport(filename=f'{bill.period}.pdf')
-pdf_report.generate(flatmate1, flatmate2, bill)
+
+class ResultsPage(MethodView):
+    def post(self):
+        billform = BillForm(request.form)
+        amount = billform.amount.data
+        return amount
+
+class BillForm(Form):
+    amount = StringField("Bill Amount: ")
+    period = StringField("Bill Period: ")
+
+    name1 = StringField("Name: ")
+    days_in_house1 = StringField("Days in the house: ")
+
+    name2 = StringField("Name: ")
+    days_in_house2 = StringField("Days in the house: ")
+
+    button = SubmitField("Calculate")
+
+app.add_url_rule('/', view_func=HomePage.as_view('home_page'))
+app.add_url_rule('/bill', view_func=BillFormPage.as_view('bill_form_page'))
+app.add_url_rule('/results', view_func=ResultsPage.as_view('results_page'))
+
+app.run(debug=True)
